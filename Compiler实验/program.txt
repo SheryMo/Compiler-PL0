@@ -1,0 +1,83 @@
+VAR x, y, z, q, r, n, f;
+
+PROCEDURE multiply;
+VAR a, b;
+BEGIN
+  a := x;
+  b := y;
+  z := 0;
+  WHILE b > 0 DO
+  BEGIN
+    IF ODD b THEN z := z + a;
+    a := 2 * a;
+    b := b / 2
+  END
+END;
+
+PROCEDURE divide;
+VAR w;
+BEGIN
+  r := x;
+  q := 0;
+  w := y;
+  WHILE w <= r DO w := 2 * w;
+  WHILE w > y DO
+  BEGIN
+    q := 2 * q;
+    w := w / 2;
+    IF w <= r THEN
+    BEGIN
+      r := r - w;
+      q := q + 1
+    END
+  END
+END;
+
+PROCEDURE gcd;
+VAR w, g;
+BEGIN
+  w := x;
+  g := y;
+  WHILE w # g DO
+  BEGIN
+    IF w < g THEN g := g - w;
+    IF g < w THEN w := w - g
+  END;
+  z := w
+END;
+
+PROCEDURE fact;
+BEGIN
+  IF n > 1 THEN
+  BEGIN
+    f := n * f;
+    n := n - 1;
+    CALL fact
+  END
+END;
+
+PROCEDURE staticlink;
+var a;
+procedure modifier;
+begin
+a := 5;
+q := 3;
+end;
+begin
+a:=3;
+if n = 0 then
+begin
+call modifier;
+end;
+if n > 0 then
+begin
+n := n - 1;
+call staticlink;
+end;
+write(a);
+end;
+
+BEGIN
+  read(n); f := 1; CALL fact; write(f);
+  n:=3;q:=2; call staticlink; write(n);write(q);
+END.
